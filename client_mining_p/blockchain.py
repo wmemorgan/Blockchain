@@ -121,9 +121,9 @@ def mine():
     data = data.get_json()
     # Validate incoming data
     required_fields = ['id', 'proof']
-    for field in required_fields:
-        if field not in data:
-            return jsonify({'message': 'Missing required data'}), 400
+    if not all(k in data for k in required_fields):
+        response = {'message': 'Missing required data'}
+        return jsonify(response), 400
 
     print(f"INCOMING DATA: {data}")
     # Validate proof
