@@ -60,6 +60,14 @@ export const UserInfoContainer = styled.div`
     }
   }
 
+  .transaction-info {
+    ${flex("column", "center")};
+    border: 1px solid ${color.defaultBorderColor};
+    border-radius: 5px;
+	  background: ${color.primaryBgShading};
+
+  }  
+
   .user-info {
     ${flex("column", "flex-start", "center")}
     padding: 20px;

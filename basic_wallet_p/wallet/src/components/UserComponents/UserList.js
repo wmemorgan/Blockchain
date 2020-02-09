@@ -6,7 +6,7 @@ import * as S from './UserStyles'
 const UserList = props => {
   return (
 		<S.UserListContainer>
-			<h2>User List</h2>
+			<h2>DigiCoin Wallet App</h2>
 			{props.userList.length > 0 ? (
 				props.userList.map((user, index) => (
 					<S.StyledLink key={index} to={`/users/${index}`}>

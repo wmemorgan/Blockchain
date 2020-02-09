@@ -8,8 +8,8 @@ const User = props => {
 	const balance = props.user[1];
 	const userTransactions = props.transactions.filter(
 		transaction => transaction.sender === user || transaction.recipient === user
-  );
-  console.log(`USER TRANSACTIONS: `, userTransactions)
+	);
+	
 	return (
 		<S.UserInfoContainer>
 			<div className="user-info">
@@ -18,8 +18,11 @@ const User = props => {
 					<div className="stat-category">Balance:</div>
 					<div className="stat-data">{balance}</div>
 				</div>
-      </div>
-      <TransactionList transactions={userTransactions} />
+			</div>
+			<div className="transaction-info">
+				<h3>Transaction History</h3>
+				<TransactionList transactions={userTransactions} />
+			</div>
 		</S.UserInfoContainer>
 	);
 };
