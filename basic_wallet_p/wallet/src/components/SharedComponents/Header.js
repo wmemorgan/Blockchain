@@ -26,7 +26,7 @@ class Header extends Component {
   }
 
   render() {
-    const token = localStorage.getItem('jwt')
+    // const token = localStorage.getItem('jwt')
 
     return (
       <S.HeaderContainer>

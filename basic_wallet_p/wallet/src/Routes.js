@@ -18,10 +18,8 @@ class Routes extends Component {
 		try {
 			let endpoint = `${URL}/chain`;
 			let data = await axios.get(endpoint);
-			console.log(`getData`, data.data, typeof data.data);
 			const { chain } = data.data;
 			this.setState({ chain }, () => {
-				console.log(`getData state: `, this.state);
 				this.parseTransactions(this.state.chain);
 			});
 		} catch (err) {
@@ -31,19 +29,13 @@ class Routes extends Component {
 
 	parseTransactions = arr => {
 		const transactions = arr.flatMap(block => block.transactions);
-		console.log(`TRANSACTIONS: `, transactions);
 		this.setState({
 			transactions,
-			userList: Object.entries(this.userBalances(transactions))
+			userList: Object.entries(this.getUserBalances(transactions))
 		});
-		const idFilter = transactions.filter(
-			transaction =>
-				transaction.sender === "Julie" || transaction.recipient === "Julie"
-		);
-		console.log(`idFilter: `, idFilter);
 	};
 
-	userBalances = transactions => {
+	getUserBalances = transactions => {
 		const userList = {};
 		for (const transaction of transactions) {
 			const { sender, recipient, amount } = transaction;
