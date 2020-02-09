@@ -76,14 +76,20 @@ if __name__ == '__main__':
         elapsed = end - start
         # STRETCH: Track duration of finding proof
         duration = str(timedelta(seconds=elapsed))
-        print(f"Process completed new: {new_proof} in {duration}")
+        print(f"Process complete. New proof {new_proof} created in {duration}")
 
         # When found, POST it to the server {"proof": new_proof, "id": id}
         post_data = {"proof": new_proof, "id": id}
 
         r = requests.post(url=node + "/mine", json=post_data)
-        data = r.json()
 
+        try:
+            data = r.json()
+        except ValueError:
+            print("Error:  Non-json response")
+            print("Response returned:")
+            print(r)
+            break
         # TODO: If the server responds with a 'message' 'New Block Forged'
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
