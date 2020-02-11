@@ -211,7 +211,7 @@ def new_transaction():
     print(f"INCOMING DATA: {data}")
     sender = data['sender']
     recipient = data['recipient']
-    amount = data['amount']
+    amount = int(data['amount'])
     index = blockchain.new_transaction(sender, recipient, amount)
 
     response = {'message': f'added to block {index}'}

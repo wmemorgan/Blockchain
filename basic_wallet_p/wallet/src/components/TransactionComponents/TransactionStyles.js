@@ -72,10 +72,7 @@ export const TransactionInfoContainer = styled.div`
     }
     
     .transaction-stats {
-      border: 1px solid red;
-      display: grid;
-      grid-template-columns: 1fr 4fr;
-      grid-gap: 10px;
+      ${flex()}
       
       & * {
         font-size: ${fontSizing.m};

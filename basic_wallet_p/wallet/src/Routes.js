@@ -4,8 +4,7 @@ import axios from "axios";
 
 import UserList from "./components/UserComponents/UserList";
 import User from "./components/UserComponents/User";
-
-const URL = "http://localhost:5000";
+import SendMoney from "./components/TransactionComponents/SendMoney"
 
 class Routes extends Component {
 	state = {
@@ -16,7 +15,7 @@ class Routes extends Component {
 
 	getData = async () => {
 		try {
-			let endpoint = `${URL}/chain`;
+			let endpoint = `/chain`;
 			let data = await axios.get(endpoint);
 			const { chain } = data.data;
 			this.setState({ chain }, () => {
@@ -57,6 +56,7 @@ class Routes extends Component {
 	render() {
 		return (
 			<>
+				<Route path="/sendmoney" component={SendMoney} />
 				<Route
 					exact
 					path="/"
