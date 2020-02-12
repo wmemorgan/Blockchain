@@ -34,7 +34,7 @@ class Blockchain(object):
             'timestamp': time(),
             'transactions': self.current_transactions,
             'proof': proof,
-            'previous_hash': previous_hash or self.hash(self.chain(-1))
+            'previous_hash': previous_hash or self.hash(self.chain[-1])
         }
 
         # Reset the current list of transactions
@@ -121,17 +121,15 @@ def mine():
     data = data.get_json()
     # Validate incoming data
     required_fields = ['id', 'proof']
-    for field in required_fields:
-        if field not in data:
-            return jsonify({'message': 'Missing required data'}), 400
+    if not all(k in data for k in required_fields):
+        response = {'message': 'Missing required data'}
+        return jsonify(response), 400
 
     print(f"INCOMING DATA: {data}")
     # Validate proof
     proof = data['proof']
     string_object = json.dumps(blockchain.last_block, sort_keys=True)
     if blockchain.valid_proof(string_object, proof):
-        response = {'data': data}
-    
         # Forge the new Block by adding it to the chain with the proof
         previous_hash = blockchain.hash(blockchain.last_block)
         block = blockchain.new_block(proof, previous_hash)
